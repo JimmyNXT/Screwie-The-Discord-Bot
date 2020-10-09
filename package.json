@@ -1,0 +1,24 @@
+{
+  "name": "screwie-the-discord-bot",
+  "version": "1.0.0",
+  "description": "My Discord bot Screwie",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JimmyNXT/Screwie-The-Discord-Bot.git"
+  },
+  "author": "JimmyNXT",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JimmyNXT/Screwie-The-Discord-Bot/issues"
+  },
+  "homepage": "https://github.com/JimmyNXT/Screwie-The-Discord-Bot#readme",
+  "dependencies": {
+    "discord.js": "^12.3.1",
+    "ffmpeg-static": "^4.2.7",
+    "node-opus": "^0.3.3"
+  }
+}
