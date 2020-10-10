@@ -1,4 +1,4 @@
-const Discord = require('discord.js');
+/*const Discord = require('discord.js');
 require('dotenv').config();
 
 const client = new Discord.Client()
@@ -63,4 +63,8 @@ client.on('message', async message =>
     }
 });
 
-client.login(process.env.DISCORD_TOKEN);
+client.login(process.env.DISCORD_TOKEN);*/
+
+const myBot = require('./MyBot/myBot.js');
+//import myBot from './MyBot/myBot.js';
+const Screwie = new myBot();
