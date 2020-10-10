@@ -80,4 +80,3 @@ let webServer = function()
 
 Screwie();
 webServer();
-console.log('Test');
