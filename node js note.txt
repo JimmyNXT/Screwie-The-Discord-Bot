@@ -1,0 +1,14 @@
+Frameworks to considder
+    Express js
+    Nest js
+    Sequelize
+    Socket.io
+
+Project Ideas
+    Book directory
+    User Auth sestem
+    Real-time chat client
+    Collective drawing App
+    Email Sender
+    Video streaming platform
+    Web Scraper

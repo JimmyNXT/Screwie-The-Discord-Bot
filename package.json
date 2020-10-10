@@ -18,6 +18,7 @@
   "homepage": "https://github.com/JimmyNXT/Screwie-The-Discord-Bot#readme",
   "dependencies": {
     "discord.js": "^12.3.1",
+    "dotenv": "^8.2.0",
     "ffmpeg-static": "^4.2.7",
     "node-opus": "^0.3.3"
   }

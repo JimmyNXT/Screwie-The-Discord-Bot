@@ -1,6 +1,5 @@
-const priv = require('./private');
-
 const Discord = require('discord.js');
+require('dotenv').config();
 
 const client = new Discord.Client()
 
@@ -64,4 +63,4 @@ client.on('message', async message =>
     }
 });
 
-client.login(priv.token);
+client.login(process.env.DISCORD_TOKEN);
