@@ -11,6 +11,15 @@ let Screwie = function()
 
     client.once('ready',() =>{
         console.log(`Logged in as ${client.user.tag} !`);
+        
+        try
+        {
+            client.user.setStatus('Honestly IDK', 'I probably need help');
+        }
+        catch(e)
+        {
+            //console.log(e);
+        }
     });
 
     client.on('typingStart', typing => {
@@ -33,7 +42,8 @@ let Screwie = function()
         if(command === 'ping')
         {
             message.channel.send('pong');
-        }else if(command === 'spam')
+        }
+        else if(command === 'spam')
         {
             if (message.member.voice.channel) 
             {
@@ -72,12 +82,12 @@ let Screwie = function()
 
 let webServer = function()
 {
-    console.log(`Port: ${process.env.PORT||'Not found'}`);
+    console.log(`Port: ${process.env.YOUR_PORT || process.env.PORT || 'Not found'}`);
     http.createServer(function (req, res) 
     {
         res.writeHead(200, {'Content-Type': 'text/plain'});
-        res.end('Hello World!');
-    }).listen(process.env.PORT, '0.0.0.0'); 
+        res.end("Hey I'm Skrewie thge Discord Bot");
+    }).listen(process.env.YOUR_PORT||process.env.PORT, '0.0.0.0'); 
 }
 
 Screwie();
