@@ -9,12 +9,12 @@ let Screwie = function()
 
     const prefix = '-';
 
-    client.once('ready',() =>{
+    client.once('ready',async () =>{
         console.log(`Logged in as ${client.user.tag} !`);
-        
+
         try
         {
-            client.user.setStatus('Honestly IDK', 'I probably need help');
+            await client.user.setStatus('Honestly IDK', 'I probably need help');
         }
         catch(e)
         {
