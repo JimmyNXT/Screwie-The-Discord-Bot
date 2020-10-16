@@ -1,3 +1,4 @@
+const { Console } = require('console');
 const Discord = require('discord.js');
 require('dotenv').config();
 var http = require('http');
@@ -71,12 +72,13 @@ let Screwie = function()
 
 let webServer = function()
 {
+    Console.log(process.env.PORT);
     http.createServer(function (req, res) 
     {
         res.writeHead(200, {'Content-Type': 'text/plain'});
         res.end('Hello World!');
-    }).listen(80); 
+    }).listen(process.env.PORT); 
 }
 
 Screwie();
-//webServer();
+webServer();
