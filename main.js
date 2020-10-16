@@ -80,5 +80,5 @@ let webServer = function()
     }).listen(process.env.PORT, '0.0.0.0'); 
 }
 
-Screwie();
+//Screwie();
 webServer();
