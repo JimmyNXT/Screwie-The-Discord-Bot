@@ -72,7 +72,7 @@ let Screwie = function()
 
 let webServer = function()
 {
-    Console.log(`Port: ${process.env.PORT||'Not found'}`);
+    console.log(`Port: ${process.env.PORT||'Not found'}`);
     http.createServer(function (req, res) 
     {
         res.writeHead(200, {'Content-Type': 'text/plain'});
@@ -80,5 +80,5 @@ let webServer = function()
     }).listen(process.env.PORT, '0.0.0.0'); 
 }
 
-//Screwie();
+Screwie();
 webServer();
