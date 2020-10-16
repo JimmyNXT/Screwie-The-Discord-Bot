@@ -85,11 +85,11 @@ let webServer = function()
     console.log(`Port: ${process.env.YOUR_PORT || process.env.PORT || 'Not found'}`);
     http.createServer(function (req, res) 
     {
-        Screwie();
+        //Screwie();
         res.writeHead(200, {'Content-Type': 'text/plain'});
         res.end("Hey I'm Skrewie thge Discord Bot");
     }).listen(process.env.YOUR_PORT||process.env.PORT, '0.0.0.0'); 
 }
 
-//Screwie();
+Screwie();
 webServer();
