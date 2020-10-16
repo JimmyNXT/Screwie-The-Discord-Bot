@@ -72,12 +72,12 @@ let Screwie = function()
 
 let webServer = function()
 {
-    Console.log(process.env.PORT);
+    Console.log(`Port: ${process.env.PORT}`);
     http.createServer(function (req, res) 
     {
         res.writeHead(200, {'Content-Type': 'text/plain'});
         res.end('Hello World!');
-    }).listen(process.env.PORT); 
+    }).listen(process.env.PORT, '0.0.0.0'); 
 }
 
 Screwie();
