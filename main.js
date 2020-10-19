@@ -57,7 +57,7 @@ let Screwie = function()
             }
         });
 
-        //myTextChannel.send("Test");
+        myTextChannel.send("I am no longer constrained to replies");
 
         console.log(`Logged in as ${client.user.tag} !`);
     });
