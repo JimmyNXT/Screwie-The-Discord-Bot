@@ -11,15 +11,7 @@ let Screwie = function()
 
     client.once('ready',async () =>{
         console.log(`Logged in as ${client.user.tag} !`);
-
-        try
-        {
-            await client.user.setStatus('Honestly IDK', 'I probably need help');
-        }
-        catch(e)
-        {
-            console.log(e);
-        }
+        client.user.setPresence({ activity: { name: 'Fearing the dread of existance' }, status: 'idle' }).then(console.log).catch(console.error);
     });
 
     client.on('typingStart', typing => {
@@ -74,6 +66,10 @@ let Screwie = function()
             {
                 message.reply('You need to join a voice channel first!');
             }
+        }
+        else if(command === 'play')
+        {
+            
         }
     });
 
