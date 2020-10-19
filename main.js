@@ -11,8 +11,19 @@ let Screwie = function()
 
     client.once('ready',async () =>{
         console.log(`Logged in as ${client.user.tag} !`);
-        client.user.setPresence({ activity: { name: 'with feelings and breaking hearts' }, status: 'Online' }).then(console.log).catch(console.error);
-    });
+        client.user.setPresence
+        (
+            { 
+                activity: 
+                { 
+                    //name: 'with feelings and breaking hearts',
+                    name: 'poeple waist their lives',
+                    type:'WATCHING' ,
+                    details: "It's kinda sad and funny at the same time"
+                }, 
+                status: 'Online' ,
+            }).then(console.log).catch(console.error);
+        });
 
     client.on('typingStart', typing => {
     });
