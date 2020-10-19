@@ -11,7 +11,7 @@ let Screwie = function()
 
     client.once('ready',async () =>{
         console.log(`Logged in as ${client.user.tag} !`);
-        client.user.setPresence({ activity: { name: 'Fearing the dread of existance' }, status: 'idle' }).then(console.log).catch(console.error);
+        client.user.setPresence({ activity: { name: 'with feelings and breaking hearts' }, status: 'Online' }).then(console.log).catch(console.error);
     });
 
     client.on('typingStart', typing => {
