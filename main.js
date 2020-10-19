@@ -19,9 +19,8 @@ let Screwie = function()
                     //name: 'with feelings and breaking hearts',
                     name: 'poeple waist their lives',
                     type:'WATCHING' ,
-                    details: "It's kinda sad and funny at the same time"
                 }, 
-                status: 'Online' ,
+                status: 'Contemplating existence' ,
             }).then(console.log).catch(console.error);
         });
 
