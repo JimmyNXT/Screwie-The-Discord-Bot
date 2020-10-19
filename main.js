@@ -1,4 +1,4 @@
-const { Console } = require('console');
+//const { Console } = require('console');
 const Discord = require('discord.js');
 require('dotenv').config();
 var http = require('http');
@@ -9,20 +9,58 @@ let Screwie = function()
 
     const prefix = '-';
 
-    client.once('ready',async () =>{
-        console.log(`Logged in as ${client.user.tag} !`);
+    let myVoiceChannel = null;
+    let myTextChannel = null;
+
+    client.once('ready',async () =>
+    {
         client.user.setPresence
         (
             { 
                 activity: 
-                { 
-                    //name: 'with feelings and breaking hearts',
-                    name: 'poeple waist their lives',
-                    type:'WATCHING' ,
+                {
+                    type:'LISTENING',
+                    //type:'PLAYING',
+                    //type:'STREAMING',
+                    //type:'WATCHING',
+                    //
+                    //name: 'with feelings and breaking hearts'
+                    //name: 'poeple waist their lives'
+                    name: 'poeple talking shit'
                 }, 
-                status: 'Contemplating existence' ,
-            }).then(console.log).catch(console.error);
+                status: 'Online'
+            }
+        ).then(console.log).catch(console.error);
+
+
+        client.guilds.cache.each((guild) => 
+        {
+            //console.log(guild);
+            if(guild.name === 'Team C')
+            {
+                guild.channels.cache.each( (channel) =>
+                {
+                    if(channel.parent != null){
+                        if(channel.parent.name === 'Bot')
+                        {
+                            if(channel.type === 'text')
+                            {
+                                myTextChannel = channel;
+                            }
+                            else if(channel.type === 'voice')
+                            {
+                                myVoiceChannel = channel;
+                            }
+                        }
+                    }
+                });
+            }
         });
+
+        //myTextChannel.send("Test");
+
+        console.log(`Logged in as ${client.user.tag} !`);
+    });
 
     client.on('typingStart', typing => {
     });
@@ -81,6 +119,19 @@ let Screwie = function()
         {
             
         }
+        else if(command === 'show')
+        {
+            message.guild.channels.cache.each( (channel) => 
+            {
+                /*console.log(channel.name);
+                console.log('\t'+channel.type);
+                console.log('\t'+channel.id+'\n');*/
+                if(channel.type === 'category')
+                {
+                    console.log(channel);
+                }
+            });
+        }
     });
 
     client.login(process.env.DISCORD_TOKEN);
@@ -88,10 +139,10 @@ let Screwie = function()
 
 let webServer = function()
 {
-    console.log(`Port: ${process.env.YOUR_PORT || process.env.PORT || 'Not found'}`);
+    console.log(`Web server started on port : ${process.env.YOUR_PORT || process.env.PORT || 'Port Not found'}`);
     http.createServer(function (req, res) 
     {
-        //Screwie();
+        console.log('Website opened');
         res.writeHead(200, {'Content-Type': 'text/plain'});
         res.end("Hey I'm Skrewie thge Discord Bot");
     }).listen(process.env.YOUR_PORT||process.env.PORT, '0.0.0.0'); 
