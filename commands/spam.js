@@ -7,7 +7,7 @@ module.exports = {
         if (message.member.voice.channel) 
             {
                 const connection = await message.member.voice.channel.join();
-                const dispatcher = connection.play('./screem.mp3');
+                const dispatcher = connection.play('./sounds/screem.mp3');
 
                 dispatcher.on('finish', () => 
                 {
