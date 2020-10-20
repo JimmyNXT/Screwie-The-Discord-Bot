@@ -35,7 +35,8 @@ client.once('ready',async () =>
                 //name: 'poeple waist their lives'
                 name: 'poeple talking shit'
             }, 
-            status: 'Online'
+            //status: 'invisible'
+            status: 'online'
         }
     )/*.then(console.log)*/.catch(console.error);
 
@@ -90,7 +91,17 @@ client.on('message', message =>
     {
         if(command.args)
         {
-            if(!args.length) return message.reply(command.usage);
+            const embed = new Discord.MessageEmbed().setColor('#03c2fc').setTitle('Usage').setDescription(command.usage);
+            if(!args.length)
+            {
+                const embed = new Discord.MessageEmbed()
+                .setColor('#03c2fc')
+                .setTitle('Usage')
+                .setDescription('You have not provided enough arguments').addField('Usage', command.usage, true)
+                .setFooter("Skrewie's error log");
+                message.reply(embed);
+                return;
+            }
         }
 
         command.execute(message,args);
