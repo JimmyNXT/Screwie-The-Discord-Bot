@@ -5,18 +5,18 @@ module.exports = {
     async execute(message, args){
         if(!message.guild)return;
         if (message.member.voice.channel) 
-            {
-                const connection = await message.member.voice.channel.join();
-                const dispatcher = connection.play('./sounds/screem.mp3');
+        {
+            const connection = await message.member.voice.channel.join();
+            const dispatcher = connection.play('./sounds/screem.mp3');
 
-                dispatcher.on('finish', () => 
-                {
-                    message.member.voice.channel.leave();
-                });
-            } else 
+            dispatcher.on('finish', () => 
             {
-                message.reply('You need to join a voice channel first!');
-            }
+                message.member.voice.channel.leave();
+            });
+        } else 
+        {
+            message.reply('You need to join a voice channel first!');
+        }
     },
     usage: 'spam',
 };

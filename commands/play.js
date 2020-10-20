@@ -1,10 +1,19 @@
+const fs = require('fs');
+
 module.exports = {
     name: 'play',
     description: 'Playes a soung byte',
     args: true,
     async execute(message, args)
     {
-        if(!message.guild)
+        const commandFiles = fs.readdirSync('./sounds').filter(file => file.endsWith('.mp3'));
+
+        for(const file of commandFiles)
+        {
+            file.replace('.mp3','');
+            console.log(file);
+        }
+        /*if(!message.guild)
         {
             return message.reply('oops');;
         }
@@ -21,7 +30,7 @@ module.exports = {
         } else 
         {
             message.reply('You need to join a voice channel first!');
-        }
+        }*/
     },
     usage: 'play [help/sound name]',
 };
