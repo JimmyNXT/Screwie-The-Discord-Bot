@@ -97,7 +97,8 @@ client.on('message', message =>
                 const embed = new Discord.MessageEmbed()
                 .setColor('#03c2fc')
                 .setTitle('Usage')
-                .setDescription('You have not provided enough arguments').addField('Usage', command.usage, true)
+                .setDescription('You have not provided enough arguments')
+                .addField('Usage', command.usage, true)
                 .setFooter("Skrewie's error log");
                 message.reply(embed);
                 return;
@@ -126,4 +127,4 @@ let webServer = function()
     }).listen(process.env.YOUR_PORT||process.env.PORT, '0.0.0.0'); 
 }
 
-webServer();
+//webServer();
