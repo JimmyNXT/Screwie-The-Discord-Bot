@@ -12,8 +12,3 @@ Project Ideas
     Email Sender
     Video streaming platform
     Web Scraper
-
-
-
-    Objects in js
-        http://zetcode.com/javascript/createobject/
