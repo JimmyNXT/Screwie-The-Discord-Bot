@@ -2,7 +2,7 @@ module.exports = {
     name: 'spam',
     description: 'It just screems',
     args: false,
-    async execute(message, args){
+    async execute(client, message, args){
         if(!message.guild)return;
         if (message.member.voice.channel) 
         {

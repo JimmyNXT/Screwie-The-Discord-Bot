@@ -5,7 +5,7 @@ module.exports = {
     name: 'play',
     description: 'Playes a soung byte',
     args: true,
-    async execute(message, args)
+    async execute(client, message, args)
     {
         const commandFiles = fs.readdirSync('./sounds').filter(file => file.endsWith('.mp3'));
 

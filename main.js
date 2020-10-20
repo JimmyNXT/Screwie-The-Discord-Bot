@@ -19,26 +19,28 @@ for(const file of commandFiles)
 let myVoiceChannel = null;
 let myTextChannel = null;
 
+
+/*
+{ 
+activity: 
+{
+    type:'LISTENING',
+    //type:'PLAYING',
+    //type:'STREAMING',
+    //type:'WATCHING',
+    //
+    //name: 'with feelings and breaking hearts'
+    //name: 'poeple waist their lives'
+    name: 'poeple talking shit'
+}, 
+//status: 'invisible'
+status: 'online'
+}
+*/
+
 client.once('ready',async () =>
 {
-    client.user.setPresence
-    (
-        { 
-            activity: 
-            {
-                type:'LISTENING',
-                //type:'PLAYING',
-                //type:'STREAMING',
-                //type:'WATCHING',
-                //
-                //name: 'with feelings and breaking hearts'
-                //name: 'poeple waist their lives'
-                name: 'poeple talking shit'
-            }, 
-            //status: 'invisible'
-            status: 'online'
-        }
-    )/*.then(console.log)*/.catch(console.error);
+    //client.user.setPresence(presenceOptions[0])/*.then(console.log)*/.catch(console.error);
 
 
     client.guilds.cache.each((guild) => 
@@ -94,18 +96,18 @@ client.on('message', message =>
             const embed = new Discord.MessageEmbed().setColor('#03c2fc').setTitle('Usage').setDescription(command.usage);
             if(!args.length)
             {
-                const embed = new Discord.MessageEmbed()
+                c/*onst embed = new Discord.MessageEmbed()
                 .setColor('#03c2fc')
                 .setTitle('Usage')
                 .setDescription('You have not provided enough arguments')
                 .addField('Usage', command.usage, true)
                 .setFooter("Skrewie's error log");
-                message.reply(embed);
+                message.reply(embed);*/
                 return;
             }
         }
 
-        command.execute(message,args);
+        command.execute(client, message,args);
     }
     catch(ex)
     {
