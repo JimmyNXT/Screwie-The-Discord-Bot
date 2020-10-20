@@ -2,7 +2,7 @@ module.exports = {
     name: 'play',
     description: 'Playes a soung byte',
     args: true,
-    execute(message, args)
+    async execute(message, args)
     {
         if(!message.guild)
         {
