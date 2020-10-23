@@ -1,73 +1,77 @@
 require('dotenv').config();
-const fs = require('fs'); 
-const sdk = require("microsoft-cognitiveservices-speech-sdk");
+var fs = require('fs');
+var sdk = require("microsoft-cognitiveservices-speech-sdk");
+var outfilename = "output";
 
 module.exports = {
     name: 'tts',
     description: 'text to speach',
-    args: false,
-    execute(client, message, args)
-    {
-        if (message.member.voice.channel) 
-        {
-            const speechConfig = sdk.SpeechConfig.fromSubscription(process.env.AZURE_KEY_1, 'eastus');
-            const synthesizer = new sdk.SpeechSynthesizer(speechConfig);
-            const AudioOutput = new sdk.AudioOutputStream();
+    args: true,
+    async execute(client, message, args) {
+        if (message.member.voice.channel) {
 
-            AudioOutput.create();
+            var text = " ";
+            if (args == null) return;
+            args.forEach(element => {
+                text += element + " ";
+            });
+            text.trim();
+            console.log(text);
 
-            AudioOutput.close();
+            var speechConfig = sdk.SpeechConfig.fromSubscription(process.env.AZURE_KEY_1, 'eastus');
+            var audioConfig = sdk.AudioConfig.fromAudioFileOutput(`./sounds/${outfilename}.mp3`);
+            speechConfig.speechSynthesisLanguage = 'en-US';
+            speechConfig.speechSynthesisVoiceName = "en-US-AriaRUS";
+            speechConfig.speechSynthesisOutputFormat = sdk.SpeechSynthesisOutputFormat.Audio16Khz32KBitRateMonoMp3; //'audio-16khz-32kbitrate-mono-mp3';
 
+            var synthesizer = new sdk.SpeechSynthesizer(speechConfig, audioConfig);
 
-
-            synthesizer.speakTextAsync(
-                "Getting the response as an in-memory stream.",
-                async result => {
-                    // Interact with the audio ArrayBuffer data
-                    const audioData = result.audioData;
-                    console.log(`Audio data byte size: ${audioData.byteLength}.`)
-
-                    /*const connection = await message.member.voice.channel.join();
-                    const dispatcher = connection.play(result.audioData);
-
-                    dispatcher.on('finish', () => 
-                    {
-                        message.member.voice.channel.leave();
-                    });*/
-
-                    console.log(`Audio data byte size: ${audioData.byteLength}.`)
-
-                    synthesizer.close();
-                },
-                error => {
-                    console.log(error);
-                    synthesizer.close();
-                });
-            } else 
-            {
-                message.reply('You need to join a voice channel first!');
+            synthesizer.synthesizing = function(s, e) {
+                var str = "(synthesizing) Reason: " + sdk.ResultReason[e.result.reason] + " Audio chunk length: " + e.result.audioData.byteLength;
+                console.log(str);
             }
 
+            synthesizer.synthesisCompleted = function(s, e) {
+                console.log("(synthesized)  Reason: " + sdk.ResultReason[e.result.reason] + " Audio length: " + e.result.audioData.byteLength);
+            };
+
+            synthesizer.synthesisStarted = function(s, e) {
+                console.log("(synthesis started)");
+            };
+
+            synthesizer.SynthesisCanceled = function(s, e) {
+                var cancellationDetails = sdk.CancellationDetails.fromResult(e.result);
+                var str = "(cancel) Reason: " + sdk.CancellationReason[cancellationDetails.reason];
+                if (cancellationDetails.reason === sdk.CancellationReason.Error) {
+                    str += ": " + e.result.errorDetails;
+                }
+                console.log(str);
+            };
+
+            synthesizer.wordBoundary = function(s, e) {
+                console.log("(WordBoundary), Text: " + e.text + ", Audio offset: " + e.audioOffset / 10000 + "ms.");
+            };
+
+            async function dothething(moo) {
+                console.log('im doin the thing');
+                synthesizer.speakTextAsync(
+                    text,
+                    function(result) {
+                        synthesizer.close();
+                        synthesizer = undefined;
+                    },
+                    function(error) {
+                        console.trace('ERROR: ' + error);
+                        synthesizer.close();
+                        synthesizer = undefined;
+                    })
+            }
+            await dothething(text);
+
+            await client.commands.get("play").execute(client, message, outfilename);
+        } else {
+            message.reply('You need to join a voice channel first!');
+        }
     },
-    usage: 'tts [sentance]',
+    usage: `tts [sentance]`,
 };
-
-
-/*function synthesizeSpeech() {
-    const speechConfig = sdk.SpeechConfig.fromSubscription("YourSubscriptionKey", "YourServiceRegion");
-    const audioConfig = AudioConfig.fromDefaultSpeakerOutput();
-
-    const synthesizer = new SpeechSynthesizer(speechConfig, audioConfig);
-    synthesizer.speakTextAsync(
-        "Synthesizing directly to speaker output.",
-        result => {
-            if (result) {
-                console.log(JSON.stringify(result));
-            }
-            synthesizer.close();
-        },
-        error => {
-            console.log(error);
-            synthesizer.close();
-        });
-}*/
