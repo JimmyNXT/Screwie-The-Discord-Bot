@@ -7,15 +7,24 @@ module.exports = {
     args: true,
     async execute(client, message, args) {
         if (args == null) return;
-        if (args.isArray()) {
+        /*if (args.isArray()) {
             if (args.length > 1) {
                 message.reply(`I can't seem to find a command that takes ${args.length} arguments`);
             }
             if (args[0] == null) return;
-        }
+        }*/
 
-        const url = "https://api.funtranslations.com/translate/yoda.json?";
-        let text = (url + args[0]);
+        const url = "https://api.funtranslations.com/translate/yoda.json?text=";
+        let text = url;
+
+        args.forEach(e => 
+        {
+            text = text + e + " ";
+        });
+
+        text.trim();
+
+        console.log(text);
 
         try {
             request(text, function(error, response, body) {
