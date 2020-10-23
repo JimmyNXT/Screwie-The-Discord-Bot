@@ -12,3 +12,4 @@ Project Ideas
     Email Sender
     Video streaming platform
     Web Scraper
+    "Spell Checker" (i.e if you're correctly used, send message: * your)
