@@ -1,7 +1,8 @@
 require('dotenv').config();
 var fs = require('fs');
+const { OutputFormat } = require('microsoft-cognitiveservices-speech-sdk');
 var sdk = require("microsoft-cognitiveservices-speech-sdk");
-var outfilename = "output";
+var outfilename = ["output"];
 
 module.exports = {
     name: 'tts',
@@ -68,7 +69,11 @@ module.exports = {
             }
             await dothething(text);
 
-            await client.commands.get("play").execute(client, message, outfilename);
+            console.log('gonna play now');
+            setTimeout(function() {
+                client.commands.get("play").execute(client, message, outfilename);
+                //fs.unlinkSync(`./sounds/${outfilename}.mp3`); //REEEEEEEEEEE
+            }, 3000);
         } else {
             message.reply('You need to join a voice channel first!');
         }
