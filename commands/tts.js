@@ -12,6 +12,14 @@ module.exports = {
         {
             const speechConfig = sdk.SpeechConfig.fromSubscription(process.env.AZURE_KEY_1, 'eastus');
             const synthesizer = new sdk.SpeechSynthesizer(speechConfig);
+            const AudioOutput = new sdk.AudioOutputStream();
+
+            AudioOutput.create();
+
+            AudioOutput.close();
+
+
+
             synthesizer.speakTextAsync(
                 "Getting the response as an in-memory stream.",
                 async result => {
