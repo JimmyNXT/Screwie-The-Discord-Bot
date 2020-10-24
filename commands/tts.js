@@ -84,7 +84,7 @@ module.exports = {
 
                 if(!process.env.KEEP_GENERATED_SOUNDS)
                 {
-                    fs.unlinkSync(`./GenSounds/${text}.mp3`);
+                    fs.unlinkSync(`./genSounds/${text}.mp3`);
                 }
             }
         } else {
