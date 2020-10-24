@@ -5,7 +5,7 @@ module.exports = {
     description: 'A command to test what ever I want to',
     args: false,
     execute(client, message, args){
-        sythSpeech.execute('testing 1,2,3, testing');
+        process.env.KEEP_GENERATED_SOUNDS = false;
     },
     usage: 'test',
 };

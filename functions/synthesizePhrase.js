@@ -28,6 +28,7 @@ module.exports = {
                 //client.commands.get("play").execute(client, message, outfilename);
                 //playFx.execute(client,message, outfilename, delete_generated_files);
                 setImmediate(() => emitter.emit('done'));
+                return true;
             };
 
             synthesizer.speakTextAsync(
@@ -42,7 +43,7 @@ module.exports = {
                     synthesizer = undefined;
                 });
 
-                await waitFor.waitFor('done', emitter);
+            await waitFor.waitFor('done', emitter);
         }
     },
 };
