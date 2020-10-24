@@ -8,6 +8,12 @@ var http = require('http');
 const client = new Discord.Client();
 client.commands = new Discord.Collection;
 
+dir = './genSounds';
+
+if (!fs.existsSync(dir)){
+    fs.mkdirSync(dir);
+}
+
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
 for(const file of commandFiles)
