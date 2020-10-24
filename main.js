@@ -84,6 +84,16 @@ client.on('message', message =>
         return;
     }
     if(!message.content.startsWith(prefix))return;
+
+    let nonoChars = ['/','\\']
+
+    nonoChars.forEach(c => {
+        if(message.content.includes(c))
+        {
+            message.reply('Why are you line this?');
+            return;
+        }
+    });
     
 
     const args = message.content.slice(prefix.length).trim().split(/ +/);
