@@ -22,7 +22,7 @@ module.exports = {
 
             text.trim();
             console.log(text);
-
+//
             var outfilename = `./genSounds/${text}.mp3`;
 
             if( (process.env.KEEP_GENERATED_SOUNDS || '0') == 1)
