@@ -55,7 +55,7 @@ module.exports = {
                 if(!process.env.KEEP_GENERATED_SOUNDS)
                 {
                     args.forEach(word => {
-                        fs.unlinkSync(`./GenSounds/${word}.mp3`);
+                        fs.unlinkSync(`./genSounds/${word}.mp3`);
                     });
                 }
             }
