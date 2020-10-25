@@ -7,7 +7,7 @@ module.exports = {
     execute(client, message, args){
         let text  = '';
 
-        args.args(arg => {
+        args.forEach(arg => {
             text = text + arg + ' ';
         });
 
