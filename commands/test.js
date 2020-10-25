@@ -13,7 +13,7 @@ module.exports = {
 
         text.trim();
 
-        message.channel.send(`/tts ${text}`);
+        message.channel.send(text,{tts:true});
     },
     usage: 'test',
 };
