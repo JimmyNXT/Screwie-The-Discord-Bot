@@ -21,6 +21,8 @@ for(const file of commandFiles)
     const command = require(`./commands/${file}`);
     client.commands.set(command.name, command);
 }
+client.commands.every(com => {});
+
 
 let myVoiceChannel = null;
 let myTextChannel = null;
@@ -117,7 +119,7 @@ client.on('message', message =>
             const embed = new Discord.MessageEmbed().setColor('#03c2fc').setTitle('Usage').setDescription(command.usage);
             if(!args.length)
             {
-                c/*onst embed = new Discord.MessageEmbed()
+                /*const embed = new Discord.MessageEmbed()
                 .setColor('#03c2fc')
                 .setTitle('Usage')
                 .setDescription('You have not provided enough arguments')
