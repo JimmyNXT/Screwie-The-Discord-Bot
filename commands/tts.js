@@ -15,15 +15,15 @@ module.exports = {
     args: true,
     async execute(client, message, args) 
     {
-        let delete_generated_files = true;
-        let single_words = false;
+        let keep_generated_files = (process.env.KEEP_GENERATED_SOUNDS == 'true');
+        let single_words = (process.env.SINGLE_WORDS == 'true');
 
         if (message.member.voice.channel) 
         {            
             if (args == null) return;
             const emitter = new EventEmitter(); 
 
-            if(process.env.SINGLE_WORDS)
+            if(single_words)
             {
                 
 
@@ -52,7 +52,7 @@ module.exports = {
                 //args.forEach(async (word) => {});
                 message.member.voice.channel.leave();
 
-                if(!process.env.KEEP_GENERATED_SOUNDS)
+                if(!keep_generated_files)
                 {
                     args.forEach(word => {
                         fs.unlinkSync(`./genSounds/${word}.mp3`);
@@ -82,7 +82,7 @@ module.exports = {
 
                 await waitFor.waitFor('done', emitter);
 
-                if(!process.env.KEEP_GENERATED_SOUNDS)
+                if(!keep_generated_files)
                 {
                     fs.unlinkSync(`./genSounds/${text}.mp3`);
                 }

@@ -5,7 +5,15 @@ module.exports = {
     description: 'A command to test what ever I want to',
     args: false,
     execute(client, message, args){
-        //process.env.KEEP_GENERATED_SOUNDS = false;
+        let text  = '';
+
+        args.args(arg => {
+            text = text + arg + ' ';
+        });
+
+        text.trim();
+
+        message.channel.send(`/tts ${text}`);
     },
     usage: 'test',
 };
