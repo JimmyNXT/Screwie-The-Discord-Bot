@@ -32,8 +32,6 @@ module.exports = {
                     }
                 }
             }
-        
-            
         });
     },
     usage: 'weather [town name]',
