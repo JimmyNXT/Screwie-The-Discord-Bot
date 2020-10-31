@@ -3,6 +3,7 @@ require('dotenv').config();
 const fs = require('fs');
 const {prefix} = require('./config.json');
 var http = require('http');
+const { Console } = require('console');
 
 
 const client = new Discord.Client();
@@ -21,6 +22,8 @@ for(const file of commandFiles)
     const command = require(`./commands/${file}`);
     client.commands.set(command.name, command);
 }
+
+
 client.commands.every(com => {});
 
 
@@ -28,60 +31,37 @@ let myVoiceChannel = null;
 let myTextChannel = null;
 
 
-/*
-{ 
-activity: 
-{
-    type:'LISTENING',
-    //type:'PLAYING',
-    //type:'STREAMING',
-    //type:'WATCHING',
-    //
-    //name: 'with feelings and breaking hearts'
-    //name: 'poeple waist their lives'
-    name: 'poeple talking shit'
-}, 
-//status: 'invisible'
-status: 'online'
-}
-*/
-
-client.once('ready',async () =>
-{
-    //client.user.setPresence(presenceOptions[0])/*.then(console.log)*/.catch(console.error);
 
 
-    client.guilds.cache.each((guild) => 
-    {
-        //console.log(guild);
-        if(guild.name === 'Team C')
-        {
-            guild.channels.cache.each( (channel) =>
-            {
-                if(channel.parent != null){
-                    if(channel.parent.name === 'Bot')
-                    {
-                        if(channel.type === 'text')
-                        {
-                            myTextChannel = channel;
-                        }
-                        else if(channel.type === 'voice')
-                        {
-                            myVoiceChannel = channel;
-                        }
-                    }
-                }
-            });
-        }
-    });
 
-    //myTextChannel.send("I am no longer constrained to replies");
 
-    console.log(`Logged in as ${client.user.tag} !`);
-});
 
-client.on('typingStart', typing => {
-});
+
+//client.on('channelCreate', (channel) => {});
+//client.on('channelDelete', (channel) => {});
+//client.on('channelPinsUpdate', (channel,date) => {});
+//client.on('channelUpdate', (oldChannel, newChannel) => {});
+client.on('debug', (info) => {console.log(`This is a debug event\n${info}`);});
+//client.on('emojiCreate', (emoji) => {});
+//client.on('emojiDelete', (emoji) => {});
+//client.on('emojiUpdate', (oldEmoji, newEmoji) => {});
+client.on('error', (error) => {console.log(`Not Gonna lie. You fucked up\n${error}`);});
+//client.on('guildBanAdd', (guild, user) => {});
+//client.on('guildBanRemove', (guild, user) => {});
+//client.on('guildCreate', (guild) => {});
+//client.on('guildDelete', (guild) => {});
+//client.on('guildIntegrationsUpdate', (guild) => {});
+//client.on('guildMemberAdd', (member) => {});
+//client.on('guildMemberAvailable', (member) => {});
+//client.on('guildMemberRemove', (member) => {});
+//client.on('guildMemberSpeaking', (member) => {});
+//client.on('guildMemberUpdate', (oldMember, newMember) => {});
+//client.on('guildMembersChunk', (members, guild, chunck) => {});
+//client.on('guildUnavailable', (guild) => {});
+//client.on('guildUpdate', (guild) => {});
+//client.on('invalidated', () => {});
+//client.on('inviteCreate', (invite) => {});
+//client.on('inviteDelete', (invite) => {});
 
 client.on('message', message => 
 {
@@ -138,6 +118,66 @@ client.on('message', message =>
         message.reply('There wan an issues executing that command');
     }
 });
+
+//client.on('messageDelete', (message) => {});
+//client.on('messageDeleteBulk', (messages) => {});
+//client.on('messageReactionAdd', (messageReaction, user) => {});
+//client.on('messageReactionRemove', (messageReaction, user) => {});
+//client.on('messageReactionRemoveAll', (message) => {});
+//client.on('messageReactionRemoveEmoji', (messageReaction) => {});
+//client.on('messageUpdate', (oldMessage, newMessage) => {});
+//client.on('presenceUpdate', (oldPresence, newPresence) => {});
+client.on('rateLimit', (rateLimitInfo) => {console.log(`You have reached a rate limit\n${rateLimitInfo}`);});
+
+client.once('ready',async () =>
+{
+    //client.user.setPresence(presenceOptions[0])/*.then(console.log)*/.catch(console.error);
+
+
+    client.guilds.cache.each((guild) => 
+    {
+        //console.log(guild);
+        if(guild.name === 'Team C')
+        {
+            guild.channels.cache.each( (channel) =>
+            {
+                if(channel.parent != null){
+                    if(channel.parent.name === 'Bot')
+                    {
+                        if(channel.type === 'text')
+                        {
+                            myTextChannel = channel;
+                        }
+                        else if(channel.type === 'voice')
+                        {
+                            myVoiceChannel = channel;
+                        }
+                    }
+                }
+            });
+        }
+    });
+
+    //myTextChannel.send("I am no longer constrained to replies");
+
+    console.log(`Logged in as ${client.user.tag} !`);
+});
+
+//client.on('roleCreate', (role) => {});
+//client.on('roleDelete', (role) => {});
+//client.on('roleUpdate', (oldRole, newRole) => {});
+//client.on('shardDisconnect', (event, id) => {});
+//client.on('shardError', (event, shardID) => {});
+//client.on('shardReady', (event, unavailableGuilds) => {});
+//client.on('shardReconnecting', (id) => {});
+//client.on('shardResume', (id,replayedEvents) => {});
+//client.on('typingStart', (channel, user) => {});
+//client.on('userUpdate', (oldUser, newUser) => {});
+//client.on('voiceStateUpdate', (oldVoiceState, newVoiceState) => {});
+client.on('warn', (info)=> {console.log(`This is a warning event\n${info}`);});
+//client.on('webhookUpdate', (channel)=> {});
+
+
 
 client.login(process.env.DISCORD_TOKEN);
 

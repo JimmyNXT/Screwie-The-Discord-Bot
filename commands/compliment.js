@@ -36,11 +36,3 @@ module.exports = {
     },
     usage: 'compliment',
 };
-
-
-/*
-Probably just gonna steel this eventualy
-
-
-
-*/
