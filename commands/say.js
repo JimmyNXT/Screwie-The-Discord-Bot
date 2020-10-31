@@ -13,5 +13,5 @@ module.exports = {
 
         message.channel.send(text,{tts:true});
     },
-    usage: 'say [The testx you want skrewie to speak]',
+    usage: 'say [The text you want skrewie to speak]',
 };
