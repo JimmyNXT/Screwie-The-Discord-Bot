@@ -202,6 +202,7 @@ client.socket.on('Broadcast', (type, message) => {
 });
 
 setInterval(()=>{
+    console.log('Heartbeat');
     client.socket.emit('Heartbeat','text', 'Skrewie');
 },60000);
 
