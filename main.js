@@ -201,6 +201,10 @@ client.socket.on('Broadcast', (type, message) => {
     myTextChannel.send(message);
 });
 
+setInterval(()=>{
+    client.socket.emit('Heartbeat','text', 'Skrewie');
+},60000);
+
 //webServer();
 
 
