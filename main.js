@@ -4,7 +4,9 @@ const fs = require('fs');
 const {prefix} = require('./config.json');
 var http = require('http');
 const { Console } = require('console');
+const io = require("socket.io-client");
 
+let socketURL = "ws://the-hive-hub.herokuapp.com";
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection;
@@ -41,7 +43,7 @@ let myTextChannel = null;
 //client.on('channelDelete', (channel) => {});
 //client.on('channelPinsUpdate', (channel,date) => {});
 //client.on('channelUpdate', (oldChannel, newChannel) => {});
-client.on('debug', (info) => {console.log(`This is a debug event\n${info}`);});
+//client.on('debug', (info) => {console.log(`This is a debug event\n${info}`);});
 //client.on('emojiCreate', (emoji) => {});
 //client.on('emojiDelete', (emoji) => {});
 //client.on('emojiUpdate', (oldEmoji, newEmoji) => {});
@@ -177,8 +179,6 @@ client.once('ready',async () =>
 client.on('warn', (info)=> {console.log(`This is a warning event\n${info}`);});
 //client.on('webhookUpdate', (channel)=> {});
 
-
-
 client.login(process.env.DISCORD_TOKEN);
 
 let webServer = function()
@@ -192,4 +192,21 @@ let webServer = function()
     }).listen(process.env.YOUR_PORT||process.env.PORT, '0.0.0.0'); 
 }
 
+client.socket = io(socketURL,{
+    query:{
+      auth:'Skrewie'
+    }
+});
+client.socket.on('Broadcast', (type, message) => {
+    myTextChannel.send(message);
+});
+
 //webServer();
+
+
+
+
+
+
+
+
