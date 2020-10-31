@@ -201,7 +201,7 @@ client.socket.on('Broadcast', (type, message) => {
     myTextChannel.send(message);
 });
 
-client.socket("connect", () => {
+client.socket.on("connect", () => {
     socket.emit("source", "server");
   });
 
