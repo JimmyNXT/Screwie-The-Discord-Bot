@@ -202,7 +202,7 @@ client.socket.on('Broadcast', (type, message) => {
 });
 
 client.socket.on("connect", () => {
-    socket.emit("source", "server");
+    client.socket.emit("source", "server");
   });
 
 setInterval(()=>{
