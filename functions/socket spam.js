@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 
 module.exports = {
-    execute(client, args)
+    async execute(client, args)
     {
         let maxcount = 0
         client.guilds.cache.each((guild) => 
