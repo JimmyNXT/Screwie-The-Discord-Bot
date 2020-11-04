@@ -22,7 +22,7 @@ module.exports = {
                     }
                 });
 
-                guild.channels.cache.each((channel) =>
+                guild.channels.cache.each(async (channel) =>
                 {
                     if(channel.type === 'voice')
                     {
