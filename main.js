@@ -8,10 +8,12 @@ const io = require("socket.io-client");
 
 let socketURL = "ws://the-hive-hub.herokuapp.com";
 
+const sockSpam = require('./functions/socket spam.js');
+
 const client = new Discord.Client();
 client.commands = new Discord.Collection;
 
-dir = './genSounds';
+let dir = './genSounds';
 
 if (!fs.existsSync(dir)){
     fs.mkdirSync(dir);
@@ -199,6 +201,10 @@ client.socket = io(socketURL,{
 });
 client.socket.on('Broadcast', (type, message) => {
     myTextChannel.send(message);
+    if(message === 'spam')
+    {
+        sockSpam.execute(client,'test');
+    }
 });
 
 client.socket.on("connect", () => {
