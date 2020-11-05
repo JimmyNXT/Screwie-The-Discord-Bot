@@ -1,4 +1,5 @@
-const { fontcolor } = require("ffmpeg-static");
+const greetThePoeple = require('../functions/greet the poeple.js');
+const gr = require('../functions/greet the poeple.js');
 
 module.exports = {
     name: 'test',
@@ -6,7 +7,7 @@ module.exports = {
     args: false,
     async execute(client, message, args){
 
-       console.log('done');
+       gr.execute(client);
     },
     usage: 'test',
 };
