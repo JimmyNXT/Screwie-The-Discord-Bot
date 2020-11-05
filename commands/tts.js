@@ -10,7 +10,7 @@ const sythSpeech = require('../functions/synthesizePhrase.js');
 
 
 module.exports = {
-    name: 'ttssynth',
+    name: 'tts',
     description: 'text to speach',
     args: true,
     async execute(client, message, args) 
