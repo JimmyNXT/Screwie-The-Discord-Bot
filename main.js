@@ -10,14 +10,14 @@ const sockSpam = require('./functions/socket spam.js');
 
 let socketURL = "ws://the-hive-hub.herokuapp.com";
 
+const client = new Discord.Client();
+client.commands = new Discord.Collection;
+
 client.socket = io(socketURL,{
     query:{
       auth:'Skrewie'
     }
 });
-
-const client = new Discord.Client();
-client.commands = new Discord.Collection;
 
 let dir = './genSounds';
 
