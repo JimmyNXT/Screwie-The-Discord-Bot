@@ -10,13 +10,13 @@ const sythSpeech = require('../functions/synthesizePhrase.js');
 
 
 module.exports = {
-    name: 'tts',
+    name: 'ttssynth',
     description: 'text to speach',
     args: true,
     async execute(client, message, args) 
     {
         let keep_generated_files = (process.env.KEEP_GENERATED_SOUNDS == 'true');
-        let single_words = (process.env.SINGLE_WORDS == 'true');
+        let single_words = false//(process.env.SINGLE_WORDS == 'true');
 
         if (message.member.voice.channel) 
         {            

@@ -32,7 +32,7 @@ module.exports = {
             }
         });*/
 
-        message.channel.send(compliment.execute());
+        message.channel.send(compliment.execute(),{tts:true});
     },
     usage: 'compliment',
 };
