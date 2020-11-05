@@ -11,8 +11,6 @@ const sockSpam = require('./functions/socket spam.js');
 let socketURL = "ws://the-hive-hub.herokuapp.com";
 
 
-
-
 const client = new Discord.Client();
 client.commands = new Discord.Collection;
 
@@ -23,6 +21,12 @@ if (!fs.existsSync(dir)){
 }
 
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+const discordEventFiles = fs.readdirSync('./events/discord').filter(file => file.endsWith('.js'));
+
+for(const file of discordEventFiles)
+{
+    console.log(file);
+}
 
 for(const file of commandFiles)
 {
@@ -46,7 +50,7 @@ let myTextChannel = null;
 //client.on('emojiCreate', (emoji) => {});
 //client.on('emojiDelete', (emoji) => {});
 //client.on('emojiUpdate', (oldEmoji, newEmoji) => {});
-client.on('error', (error) => {console.log(`Not Gonna lie. You fucked up\n${error}`);});
+client.on('error', (error) => {console.log(`Not Gonna lie. You fucked up:\n\t${error}\n\n`);});
 //client.on('guildBanAdd', (guild, user) => {});
 //client.on('guildBanRemove', (guild, user) => {});
 //client.on('guildCreate', (guild) => {});
@@ -69,26 +73,35 @@ client.on('message', message =>
     if(message.author.bot)return;
     if(!message.guild)
     {
-        message.reply('Stranger danger');
+        message.reply('Stranger danger, stranger danger',{tts:true});
         return;
     }
     if(!message.content.startsWith(prefix))return;
 
     let nonoChars = ['/','\\']
 
-    nonoChars.forEach(c => {
-        if(message.content.includes(c))
+    nonoChars.forEach(c => 
         {
-            message.reply('Why are you line this?');
-            return;
-        }
-    });
+            if(message.content.includes(c))
+            {
+                message.reply('Why are you like this?');
+                return;
+            }
+        });
     
 
     const args = message.content.slice(prefix.length).trim().split(/ +/);
     const commandName = args.shift().toLowerCase();
 
-    console.log(commandName);
+    let msgArgText = '';
+
+    for (let i = 0; i < args.length; i++) {
+        msgArgText = msgArgText + args[i] + ' ';
+        
+    }
+
+
+    console.log(`${message.author.username} => ${commandName} : ${msgArgText}`);
 
     if(!client.commands.has(commandName))return;
     const command = client.commands.get(commandName);
@@ -155,7 +168,7 @@ client.once('ready',async () =>
             });
         }
     });
-    
+
     console.log(`Logged in as ${client.user.tag} !`);
 });
 
