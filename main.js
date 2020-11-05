@@ -25,7 +25,9 @@ const discordEventFiles = fs.readdirSync('./events/discord').filter(file => file
 
 for(const file of discordEventFiles)
 {
-    console.log(file);
+    const e = require(`./events/discord/${file}`)
+    e.execute(client);
+    //console.log(file);
 }
 
 for(const file of commandFiles)
@@ -68,7 +70,7 @@ client.on('error', (error) => {console.log(`Not Gonna lie. You fucked up:\n\t${e
 //client.on('inviteCreate', (invite) => {});
 //client.on('inviteDelete', (invite) => {});
 
-client.on('message', message => 
+/*client.on('message', message => 
 {
     if(message.author.bot)return;
     if(!message.guild)
@@ -120,6 +122,7 @@ client.on('message', message =>
                 .addField('Usage', command.usage, true)
                 .setFooter("Skrewie's error log");
                 message.reply(embed);*/
+                /*
                 return;
             }
         }
@@ -131,7 +134,7 @@ client.on('message', message =>
         console.error(ex);
         message.reply('There wan an issues executing that command');
     }
-});
+});*/
 
 
 //client.on('messageDelete', (message) => {});
@@ -144,7 +147,7 @@ client.on('message', message =>
 //client.on('presenceUpdate', (oldPresence, newPresence) => {});
 client.on('rateLimit', (rateLimitInfo) => {console.log(`You have reached a rate limit\n${rateLimitInfo}`);});
 
-client.once('ready',async () =>
+/*client.once('ready',async () =>
 {
     client.guilds.cache.each((guild) => 
     {
@@ -170,7 +173,7 @@ client.once('ready',async () =>
     });
 
     console.log(`Logged in as ${client.user.tag} !`);
-});
+});*/
 
 //client.on('roleCreate', (role) => {});
 //client.on('roleDelete', (role) => {});
