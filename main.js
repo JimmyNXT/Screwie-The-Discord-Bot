@@ -10,6 +10,11 @@ const sockSpam = require('./functions/socket spam.js');
 
 let socketURL = "ws://the-hive-hub.herokuapp.com";
 
+client.socket = io(socketURL,{
+    query:{
+      auth:'Skrewie'
+    }
+});
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection;
@@ -36,118 +41,10 @@ for(const file of commandFiles)
     client.commands.set(command.name, command);
 }
 
-
-client.commands.every(com => {});
-
-
 let myVoiceChannel = null;
 let myTextChannel = null;
 
-
-//client.on('channelCreate', (channel) => {});
-//client.on('channelDelete', (channel) => {});
-//client.on('channelPinsUpdate', (channel,date) => {});
-//client.on('channelUpdate', (oldChannel, newChannel) => {});
-//client.on('debug', (info) => {console.log(`This is a debug event\n${info}`);});
-//client.on('emojiCreate', (emoji) => {});
-//client.on('emojiDelete', (emoji) => {});
-//client.on('emojiUpdate', (oldEmoji, newEmoji) => {});
-client.on('error', (error) => {console.log(`Not Gonna lie. You fucked up:\n\t${error}\n\n`);});
-//client.on('guildBanAdd', (guild, user) => {});
-//client.on('guildBanRemove', (guild, user) => {});
-//client.on('guildCreate', (guild) => {});
-//client.on('guildDelete', (guild) => {});
-//client.on('guildIntegrationsUpdate', (guild) => {});
-//client.on('guildMemberAdd', (member) => {});
-//client.on('guildMemberAvailable', (member) => {});
-//client.on('guildMemberRemove', (member) => {});
-//client.on('guildMemberSpeaking', (member) => {});
-//client.on('guildMemberUpdate', (oldMember, newMember) => {});
-//client.on('guildMembersChunk', (members, guild, chunck) => {});
-//client.on('guildUnavailable', (guild) => {});
-//client.on('guildUpdate', (guild) => {});
-//client.on('invalidated', () => {});
-//client.on('inviteCreate', (invite) => {});
-//client.on('inviteDelete', (invite) => {});
-
-/*client.on('message', message => 
-{
-    if(message.author.bot)return;
-    if(!message.guild)
-    {
-        message.reply('Stranger danger, stranger danger',{tts:true});
-        return;
-    }
-    if(!message.content.startsWith(prefix))return;
-
-    let nonoChars = ['/','\\']
-
-    nonoChars.forEach(c => 
-        {
-            if(message.content.includes(c))
-            {
-                message.reply('Why are you like this?');
-                return;
-            }
-        });
-    
-
-    const args = message.content.slice(prefix.length).trim().split(/ +/);
-    const commandName = args.shift().toLowerCase();
-
-    let msgArgText = '';
-
-    for (let i = 0; i < args.length; i++) {
-        msgArgText = msgArgText + args[i] + ' ';
-        
-    }
-
-
-    console.log(`${message.author.username} => ${commandName} : ${msgArgText}`);
-
-    if(!client.commands.has(commandName))return;
-    const command = client.commands.get(commandName);
-
-    try
-    {
-        if(command.args)
-        {
-            const embed = new Discord.MessageEmbed().setColor('#03c2fc').setTitle('Usage').setDescription(command.usage);
-            if(!args.length)
-            {
-                /*const embed = new Discord.MessageEmbed()
-                .setColor('#03c2fc')
-                .setTitle('Usage')
-                .setDescription('You have not provided enough arguments')
-                .addField('Usage', command.usage, true)
-                .setFooter("Skrewie's error log");
-                message.reply(embed);*/
-                /*
-                return;
-            }
-        }
-
-        command.execute(client, message,args);
-    }
-    catch(ex)
-    {
-        console.error(ex);
-        message.reply('There wan an issues executing that command');
-    }
-});*/
-
-
-//client.on('messageDelete', (message) => {});
-//client.on('messageDeleteBulk', (messages) => {});
-//client.on('messageReactionAdd', (messageReaction, user) => {});
-//client.on('messageReactionRemove', (messageReaction, user) => {});
-//client.on('messageReactionRemoveAll', (message) => {});
-//client.on('messageReactionRemoveEmoji', (messageReaction) => {});
-//client.on('messageUpdate', (oldMessage, newMessage) => {});
-//client.on('presenceUpdate', (oldPresence, newPresence) => {});
-client.on('rateLimit', (rateLimitInfo) => {console.log(`You have reached a rate limit\n${rateLimitInfo}`);});
-
-/*client.once('ready',async () =>
+client.once('ready',async () =>
 {
     client.guilds.cache.each((guild) => 
     {
@@ -173,32 +70,10 @@ client.on('rateLimit', (rateLimitInfo) => {console.log(`You have reached a rate 
     });
 
     console.log(`Logged in as ${client.user.tag} !`);
-});*/
-
-//client.on('roleCreate', (role) => {});
-//client.on('roleDelete', (role) => {});
-//client.on('roleUpdate', (oldRole, newRole) => {});
-//client.on('shardDisconnect', (event, id) => {});
-//client.on('shardError', (event, shardID) => {});
-//client.on('shardReady', (event, unavailableGuilds) => {});
-//client.on('shardReconnecting', (id) => {});
-//client.on('shardResume', (id,replayedEvents) => {});
-//client.on('typingStart', (channel, user) => {});
-//client.on('userUpdate', (oldUser, newUser) => {});
-//client.on('voiceStateUpdate', (oldVoiceState, newVoiceState) => {});
-client.on('warn', (info)=> {console.log(`This is a warning event\n${info}`);});
-//client.on('webhookUpdate', (channel)=> {});
+});
 
 client.login(process.env.DISCORD_TOKEN);
 
-
-
-
-client.socket = io(socketURL,{
-    query:{
-      auth:'Skrewie'
-    }
-});
 client.socket.on('Broadcast', (type, message) => {
     myTextChannel.send(message);
     if(message === 'spam')
