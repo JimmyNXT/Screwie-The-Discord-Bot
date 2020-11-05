@@ -1,14 +1,17 @@
 const Discord = require('discord.js');
-require('dotenv').config();
 const fs = require('fs');
-const {prefix} = require('./config.json');
-var http = require('http');
-const { Console } = require('console');
 const io = require("socket.io-client");
+
+
+require('dotenv').config();
+const {prefix} = require('./config.json');
+
+const sockSpam = require('./functions/socket spam.js');
 
 let socketURL = "ws://the-hive-hub.herokuapp.com";
 
-const sockSpam = require('./functions/socket spam.js');
+
+
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection;
@@ -33,12 +36,6 @@ client.commands.every(com => {});
 
 let myVoiceChannel = null;
 let myTextChannel = null;
-
-
-
-
-
-
 
 
 //client.on('channelCreate', (channel) => {});
@@ -123,6 +120,7 @@ client.on('message', message =>
     }
 });
 
+
 //client.on('messageDelete', (message) => {});
 //client.on('messageDeleteBulk', (messages) => {});
 //client.on('messageReactionAdd', (messageReaction, user) => {});
@@ -135,12 +133,8 @@ client.on('rateLimit', (rateLimitInfo) => {console.log(`You have reached a rate 
 
 client.once('ready',async () =>
 {
-    //client.user.setPresence(presenceOptions[0])/*.then(console.log)*/.catch(console.error);
-
-
     client.guilds.cache.each((guild) => 
     {
-        //console.log(guild);
         if(guild.name === 'Team C')
         {
             guild.channels.cache.each( (channel) =>
@@ -161,9 +155,7 @@ client.once('ready',async () =>
             });
         }
     });
-
-    //myTextChannel.send("I am no longer constrained to replies");
-
+    
     console.log(`Logged in as ${client.user.tag} !`);
 });
 
@@ -183,16 +175,8 @@ client.on('warn', (info)=> {console.log(`This is a warning event\n${info}`);});
 
 client.login(process.env.DISCORD_TOKEN);
 
-let webServer = function()
-{
-    console.log(`Web server started on port : ${process.env.YOUR_PORT || process.env.PORT || 'Port Not found'}`);
-    http.createServer(function (req, res) 
-    {
-        console.log('Website opened');
-        res.writeHead(200, {'Content-Type': 'text/plain'});
-        res.end("Hey I'm Skrewie thge Discord Bot");
-    }).listen(process.env.YOUR_PORT||process.env.PORT, '0.0.0.0'); 
-}
+
+
 
 client.socket = io(socketURL,{
     query:{
@@ -215,13 +199,3 @@ setInterval(()=>{
     console.log('Heartbeat');
     client.socket.emit('Heartbeat','text', 'Skrewie');
 },60000);
-
-//webServer();
-
-
-
-
-
-
-
-
