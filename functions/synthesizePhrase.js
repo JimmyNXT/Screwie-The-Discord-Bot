@@ -13,7 +13,7 @@ module.exports = {
             var speechConfig = sdk.SpeechConfig.fromSubscription(process.env.AZURE_KEY_1, 'eastus');
             var audioConfig = sdk.AudioConfig.fromAudioFileOutput(`./genSounds/${phrase}.mp3`);
             speechConfig.speechSynthesisLanguage = 'en-US';
-            speechConfig.speechSynthesisVoiceName = "en-US-AriaRUS";
+            speechConfig.speechSynthesisVoiceName = "en-US-BenjaminRUS"; //"en-US-AriaRUS";
             speechConfig.speechSynthesisOutputFormat = sdk.SpeechSynthesisOutputFormat.Audio16Khz32KBitRateMonoMp3; //'audio-16khz-32kbitrate-mono-mp3';
 
             var synthesizer = new sdk.SpeechSynthesizer(speechConfig, audioConfig);
