@@ -5,8 +5,8 @@ const { OutputFormat } = require('microsoft-cognitiveservices-speech-sdk');
 var sdk = require("microsoft-cognitiveservices-speech-sdk");
 const EventEmitter = require('events');
 
-const playFx = require('../functions/play.js');
-const sythSpeech = require('../functions/synthesizePhrase.js');
+const playFx = require('../../../functions/play.js');
+const sythSpeech = require('../../../functions/synthesizePhrase.js');
 
 
 module.exports = {
