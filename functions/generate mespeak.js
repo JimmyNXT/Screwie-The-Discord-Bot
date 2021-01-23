@@ -12,11 +12,12 @@ module.exports = {
             speed:100
         });
 
-        if(fs.existsSync(filename))
-        {
-            fs.unlinkSync(filename);
-        }
+        // if(fs.existsSync(filename))
+        // {
+        //     console.log(filename + " deleted");
+        //     fs.unlinkSync(filename);
+        // }
         
-        fs.appendFileSync(filename,Buffer.from(data));
+        fs.writeFileSync(filename,Buffer.from(data),{flag: 'w'});
     },
 }

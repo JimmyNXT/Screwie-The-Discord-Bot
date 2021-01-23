@@ -6,7 +6,7 @@ const io = require("socket.io-client");
 require('dotenv').config();
 const {prefix} = require('./config.json');
 
-const sockSpam = require('./functions/socket spam.js');
+//const sockSpam = require('./functions/socket spam.js');
 
 let socketURL = "ws://the-hive-hub.herokuapp.com";
 
@@ -40,6 +40,7 @@ for(const file of commandFiles)
     const command = require(`./commands/${file}`);
     client.commands.set(command.name, command);
 }
+
 
 let myVoiceChannel = null;
 let myTextChannel = null;
@@ -78,7 +79,7 @@ client.socket.on('Broadcast', (type, message) => {
     myTextChannel.send(message);
     if(message === 'spam')
     {
-        sockSpam.execute(client,'test');
+        //sockSpam.execute(client,'test');
     }
 });
 
@@ -86,7 +87,7 @@ client.socket.on("connect", () => {
     client.socket.emit("source", "server");
   });
 
-setInterval(()=>{
-    console.log('Heartbeat');
-    client.socket.emit('Heartbeat','text', 'Skrewie');
-},60000);
+// setInterval(()=>{
+//     console.log('Heartbeat');
+//     client.socket.emit('Heartbeat','text', 'Skrewie');
+// },60000);
