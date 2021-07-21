@@ -83,6 +83,7 @@ client.once('ready',async () =>
 //Login to discord
 client.login(process.env.DISCORD_TOKEN);
 
+/*
 //Create cocket to communicate with other services/devices/nodes
 client.socket.on('Broadcast', (type, message) => {
     myTextChannel.send(message);
@@ -93,12 +94,15 @@ client.socket.on('Broadcast', (type, message) => {
 });
 
 //Connect to socket
-client.socket.on("connect", () => {
+client.socket.on("connect", () => 
+{
     client.socket.emit("source", "server");
-  });
+});
 
 //Emit heartbeat periodically for UP status display.
 // setInterval(()=>{
 //     console.log('Heartbeat');
 //     client.socket.emit('Heartbeat','text', 'Skrewie');
 // },60000);
+
+*/
