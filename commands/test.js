@@ -2,6 +2,8 @@ const fs = require('fs');
 
 const test = require('../functions/test');
 
+const weather = require('../functions/weather');
+
 module.exports = {
     name: 'test',
     description: 'A command to test what ever I want to',
@@ -9,19 +11,14 @@ module.exports = {
     execute(client, message, args){
         let yodafyData = require('../data/yodafy.json');
 
-        if(!yodafyData["I have a question"])
-        {
-            yodafyData["I have a question"] = "A question, I have";
-            console.log(yodafyData["I have a question"]);
+        if (args == null) return;
 
-            fs.writeFile('./data/yodafy.json', JSON.stringify(yodafyData), function (err) 
-            {
-                if (err) throw err;
-            }); 
-        }
-        else{
-            console.log("It worked");
-        }
+        var replyCallbackFunction = function(replyMessage)
+        {
+            message.reply(replyMessage);
+        };
+
+        weather.execute("Bloemfontein", replyCallbackFunction);
     },
-    usage: 'test',
+    usage: 'If you\'re using this you should know what you\'re doing',
 };

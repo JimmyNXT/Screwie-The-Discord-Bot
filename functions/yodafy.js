@@ -13,7 +13,7 @@ module.exports = {
         else
         {
             //Ready the text for translation
-            const jsonData = JSON.stringify({text: inText})
+            const jsonData = JSON.stringify({text: inText});
 
             //Set the options for the http/api request
             const options = 
