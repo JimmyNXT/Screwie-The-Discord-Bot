@@ -1,6 +1,9 @@
 /*
     TODO:
     - Check if config.json exists and is correct
+    - Check if data folder and content exist
+        - Audio folder
+        - Yodafy.json file
     - Check if ENV variables exist
     - Make Skrewie the new Socket server
 */
