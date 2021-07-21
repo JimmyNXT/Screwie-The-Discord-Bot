@@ -3,7 +3,7 @@ const Discord = require('discord.js');
 
 module.exports = {
     name: 'yodafy',
-    description: 'like yoda, I will speak',
+    description: 'This command will convert the massage you Skrewie to the diction of Master Yoda',
     args: true,
     async execute(client, message, args) {
         if (args == null) return;

@@ -1,3 +1,5 @@
+//This function generates a random compliment
+
 const fs = require('fs');
 
 module.exports = {

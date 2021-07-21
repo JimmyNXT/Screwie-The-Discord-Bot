@@ -3,7 +3,7 @@ require('dotenv').config();
 
 module.exports = {
     name: 'weather',
-    description: 'Checkes the current weather',
+    description: 'This command outputs the weather for the location you give Skrewie',
     args: true,
     execute(client, message, args)
     {
@@ -15,7 +15,7 @@ module.exports = {
             //console.log(url);
             //console.log(res.statusCode);
             
-            if (error) 
+            if (error) //TODO: Better output on weather error
             {
                 return  console.log(error);
             }
@@ -28,7 +28,7 @@ module.exports = {
                 {
                     if(res.statusCode == 400)
                     {
-                        message.channel.send(`${body.error.message}`,{tts:true});
+                        message.channel.send(`${body.error.message}`);
                     }
                 }
             }
