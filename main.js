@@ -19,15 +19,14 @@ client.socket = io(socketURL,{
     }
 });
 
+//make folder for generated audio to be stored in. Audio will probably be deleted after it's played
 let dir = './genSounds';
-
 if (!fs.existsSync(dir)){
     fs.mkdirSync(dir);
 }
 
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+//Register all discord events. They are each handelet in their own file.
 const discordEventFiles = fs.readdirSync('./events/discord').filter(file => file.endsWith('.js'));
-
 for(const file of discordEventFiles)
 {
     const e = require(`./events/discord/${file}`)
@@ -35,13 +34,15 @@ for(const file of discordEventFiles)
     //console.log(file);
 }
 
+//Register all discord Commands. They are each handelet in their own file.
+const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 for(const file of commandFiles)
 {
     const command = require(`./commands/${file}`);
     client.commands.set(command.name, command);
 }
 
-
+//Ensure that all guilds that are connected are setup correctly.
 let myVoiceChannel = null;
 let myTextChannel = null;
 
@@ -73,8 +74,10 @@ client.once('ready',async () =>
     console.log(`Logged in as ${client.user.tag} !`);
 });
 
+//Login to discord
 client.login(process.env.DISCORD_TOKEN);
 
+//Create cocket to communicate with other services/devices/nodes
 client.socket.on('Broadcast', (type, message) => {
     myTextChannel.send(message);
     if(message === 'spam')
@@ -83,10 +86,12 @@ client.socket.on('Broadcast', (type, message) => {
     }
 });
 
+//Connect to socket
 client.socket.on("connect", () => {
     client.socket.emit("source", "server");
   });
 
+//Emit heartbeat periodicaly for UP status display.
 // setInterval(()=>{
 //     console.log('Heartbeat');
 //     client.socket.emit('Heartbeat','text', 'Skrewie');
