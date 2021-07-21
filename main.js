@@ -1,10 +1,16 @@
+/*
+    TODO:
+    - Check if config.json exists and is correct
+    - Check if ENV variables exist
+    - Make Skrewie the new Socket server
+*/
+
 const Discord = require('discord.js');
 const fs = require('fs');
 const io = require("socket.io-client");
 
-
+//Load ENV variables from .ENV file if .ENV file exists
 require('dotenv').config();
-const {prefix} = require('./config.json');
 
 //const sockSpam = require('./functions/socket spam.js');
 
@@ -20,12 +26,12 @@ client.socket = io(socketURL,{
 });
 
 //make folder for generated audio to be stored in. Audio will probably be deleted after it's played
-let dir = './genSounds';
+let dir = './Sounds';
 if (!fs.existsSync(dir)){
     fs.mkdirSync(dir);
 }
 
-//Register all discord events. They are each handelet in their own file.
+//Register all discord events. They are each handled in their own file.
 const discordEventFiles = fs.readdirSync('./events/discord').filter(file => file.endsWith('.js'));
 for(const file of discordEventFiles)
 {
@@ -34,7 +40,7 @@ for(const file of discordEventFiles)
     //console.log(file);
 }
 
-//Register all discord Commands. They are each handelet in their own file.
+//Register all discord Commands. They are each handled in their own file.
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 for(const file of commandFiles)
 {
@@ -71,7 +77,7 @@ client.once('ready',async () =>
         }
     });
 
-    console.log(`Logged in as ${client.user.tag} !`);
+    console.log(`Logged in as ${client.user.tag}`);
 });
 
 //Login to discord
@@ -91,7 +97,7 @@ client.socket.on("connect", () => {
     client.socket.emit("source", "server");
   });
 
-//Emit heartbeat periodicaly for UP status display.
+//Emit heartbeat periodically for UP status display.
 // setInterval(()=>{
 //     console.log('Heartbeat');
 //     client.socket.emit('Heartbeat','text', 'Skrewie');

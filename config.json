@@ -1,6 +1,3 @@
 {
-    "prefix": "-",
-    "tts_agent": "mespeak",
-    "tts_agent-Unused-1": "discord",
-    "tts_agent-Unused-2": "azure"
+    "prefix": "-"
 }
