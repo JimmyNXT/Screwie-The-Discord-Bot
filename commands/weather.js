@@ -1,38 +1,26 @@
 const request = require('request');
 require('dotenv').config();
 
+//TODO: Incorrect use if no args
+
+const weather = require('../functions/weather');
+
 module.exports = {
     name: 'weather',
-    description: 'Checkes the current weather',
+    description: 'This command outputs the weather for the location you give Skrewie',
     args: true,
     execute(client, message, args)
     {
-        let url = `http://api.weatherapi.com/v1/forecast.json?key=${process.env.WEATHER_API_KEY}&q=${args[0]}&days=1`;
-        
-        let options = {json: true};
+        if (args == null) return;
+        if ( args.length > 1) return; 
 
-        request(url, options, (error, res, body) => {
-            //console.log(url);
-            //console.log(res.statusCode);
-            
-            if (error) 
-            {
-                return  console.log(error);
-            }
-            else
-            {
-                if (res.statusCode == 200) 
-                {
-                    message.channel.send(`It is currently ${body.current.condition.text} in ${body.location.name} with a tempreture of ${body.current.temp_c}. The min and max tempreture for today are ${body.forecast.forecastday[0].day.mintemp_c} and ${body.forecast.forecastday[0].day.maxtemp_c}`,{tts:true});
-                }else
-                {
-                    if(res.statusCode == 400)
-                    {
-                        message.channel.send(`${body.error.message}`,{tts:true});
-                    }
-                }
-            }
-        });
+        var replyCallbackFunction = function(reply)
+        {
+            let jsonWeather = reply;
+            message.reply(`It is currently ${jsonWeather.current.condition.text} in ${jsonWeather.location.name} with a tempreture of ${jsonWeather.current.temp_c}. The min and max tempreture for today are ${jsonWeather.forecast.forecastday[0].day.mintemp_c} and ${jsonWeather.forecast.forecastday[0].day.maxtemp_c}`);
+        };
+
+        weather.execute(args[0], replyCallbackFunction);
     },
     usage: 'weather [town name]',
 };

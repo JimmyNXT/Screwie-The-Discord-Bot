@@ -1,17 +1,24 @@
+const say = require('../functions/say');
+
 module.exports = {
     name: 'say',
-    description: 'A text tospeach',
+    description: 'This command will make Skrewie say whatever message you give him in you current voice channel or using tts in a text channel if you are nor in a voice channel',
     args: true,
-    execute(client, message, args){
-        let text  = '';
-        
+    async execute(client, message, args){
+        let text = "";
+
         args.forEach(arg => {
-            text = text + arg + ' ';
+            text = text + ' ' + arg;
         });
 
-        text.trim();
-
-        message.channel.send(text,{tts:true});
+        if(message.member.voice.channel)
+        {
+            say.execute(text, message.member.voice.channel);
+        }
+        else
+        {
+            //TODO: Add tts
+        }
     },
-    usage: 'say [The text you want skrewie to speak]',
+    usage: 'say [message]',
 };

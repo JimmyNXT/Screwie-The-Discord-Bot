@@ -5,7 +5,7 @@ let presenceOptions = [
         activity: 
         {
             type:'LISTENING',
-            name: 'poeple talking shit'
+            name: 'people talking shit'
         }, 
         status: 'online'
     },{ 
@@ -19,14 +19,14 @@ let presenceOptions = [
         activity: 
         {
             type:'WATCHING',
-            name: 'poeple talking shit'
+            name: 'people talk shit'
         }, 
         status: 'online'
     },{ 
         activity: 
         {
             type:'WATCHING',
-            name: 'my depression slowly ruim my life'
+            name: 'my depression slowly ruin my life'
         }, 
         status: 'online'
     }];

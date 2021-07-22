@@ -1,46 +1,30 @@
-const request = require('request');
 const Discord = require('discord.js');
+
+const yodafy = require('../functions/yodafy');
+
+//TODO: Incorrect use if no args
 
 module.exports = {
     name: 'yodafy',
-    description: 'like yoda, I will speak',
+    description: 'This command will convert the massage you Skrewie to the diction of Master Yoda',
     args: true,
-    async execute(client, message, args) {
+    execute(client, message, args) {
         if (args == null) return;
-        /*if (args.isArray()) {
-            if (args.length > 1) {
-                message.reply(`I can't seem to find a command that takes ${args.length} arguments`);
-            }
-            if (args[0] == null) return;
-        }*/
 
-        const url = "https://api.funtranslations.com/translate/yoda.json?text=";
-        let text = url;
+        let text = "";
 
-        args.forEach(e => 
-        {
+        args.forEach(e => {
             text = text + e + " ";
         });
 
-        text.trim();
+        text = text.trim();
 
-        console.log(text);
+        var replyCallbackFunction = function(replyMessage)
+        {
+            message.reply(replyMessage);
+        };
 
-        try {
-            request(text, function(error, response, body) {
-                const obj = JSON.parse(body);
-                if (obj.hasOwnProperty('contents')) {
-                    message.reply(obj.contents.translated);
-                } else {
-                    message.reply(obj.error.message);
-                }
-
-            });
-        } catch (x) {
-            message.reply("I think I just died reading that...");
-            console.log(x);
-        }
-
+        yodafy.execute(text, replyCallbackFunction);
     },
-    usage: 'yodafy/message',
+    usage: 'yodafy [message]',
 };
