@@ -1,11 +1,12 @@
 const https = require('https');
+const fs = require('fs');
 
 let yodafyData = require('../data/yodafy.json');
 
 module.exports = {
     execute(inText, callback) {
         inText = inText.charAt(0).toUpperCase() + inText.substring(1);
-        console.log("New string : " + inText);
+        //console.log("New string : " + inText);
         if(yodafyData[inText])
         {
             callback(yodafyData[inText]);
@@ -31,7 +32,7 @@ module.exports = {
 
             const request = https.request(options, response => 
             {
-                console.log(`statusCode: ${response.statusCode}`);
+                //console.log(`statusCode: ${response.statusCode}`);
 
                 let dataBuffer = []
                 response.on('data', (data) => 
