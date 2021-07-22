@@ -1,4 +1,4 @@
-const sayfx = require('../functions/say');
+const say = require('../functions/say');
 
 module.exports = {
     name: 'say',
@@ -13,7 +13,7 @@ module.exports = {
 
         if(message.member.voice.channel)
         {
-            sayfx.execute(text, message.member.voice.channel);
+            say.execute(text, message.member.voice.channel);
         }
         else
         {
